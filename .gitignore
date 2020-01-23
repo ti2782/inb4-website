@@ -1,0 +1,6 @@
+*~
+html/*
+data/*
+last_updated.txt
+last_page.txt
+!.gitignore

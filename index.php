@@ -14,6 +14,7 @@
       <!-- Navbar content -->
       <a class="navbar-brand" href='https://inb4sauce.net'>INB4SAUCE</a>
       <form class="form-inline">
+        <a class="navbar-brand" href='https://blackbirds.inb4sauce.net'>BLACKBIRDS</a>
 	<input class="form-control mr-sm-2" type="search" id="search-text" placeholder="Search" aria-label="Search">
 	<button class="btn btn-outline-success my-2 my-sm-0" id="search-button" type="submit" onClick="javascript:searchButton()">Search</button>
       </form>      

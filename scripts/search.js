@@ -3,4 +3,7 @@ function searchButton() {
     if(search) {
 	window.open('https://archive.4plebs.org/_/search/text/' + search + '/image/T98E_D9VKmMFt6zS_rAqiw/results/thread/', '_blank');
     }
+    else {
+	window.open('https://archive.4plebs.org/_/search/image/T98E_D9VKmMFt6zS_rAqiw/results/thread/', '_blank');
+    }	
 }

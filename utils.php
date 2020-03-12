@@ -43,8 +43,9 @@
 
 function getFooter() {
 $update = file_get_contents("last_updated.txt");
+echo '<div><a href="https://t.me/inb4sauce" class="fa fa-telegram"></a><a href="https://twitter.com/Inb4Sauce" class="fa fa-twitter"></a></div>';
 echo '<div class="alert alert-dark" role="alert">
-  <p align="left"><small><b>LAST UPDATED @ '.$update.'<b></small></p><p align="left"><small> Help maintaining this site. Funds are NOT used for terrorist activity. Pinky swear. XMR: 8BWiSZbB32cDDrPvFwWsrxfdVvL2vBxbv3UWNxoLufqS3QpAiUSviTFSJBenMWk6joj9xcrrCT5hsNKUVv5ZEC1XUjaZpQZ</small></p></div>';
+  <p align="left"><small><b>LAST UPDATED @ '.$update.'<b></small></p><p align="left"><small> Help maintaining this site. Funds are NOT used for terrorist activity. Pinky swear. XMR: 8BWiSZbB32cDDrPvFwWsrxfdVvL2vBxbv3UWNxoLufqS3QpAiUSviTFSJBenMWk6joj9xcrrCT5hsNKUVv5ZEC1XUjaZpQZ</small></p></div></a>';
 }
 
 ?>

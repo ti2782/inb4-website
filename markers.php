@@ -3,7 +3,7 @@
   <head>    
     <!--  Meta  -->
     <meta charset="UTF-8" />
-    <title>INB4SAUCE</title>
+    <title>INB4SAUCE MARKERS</title>
 
     <!--  Styles  -->
     <link rel="stylesheet" href="styles/main.css">
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <nav class="navbar navbar-dark bg-dark">
-      <!-- Navbar content -->
+      <!-- Navbar content -->      
       <a class="navbar-brand" href='https://inb4sauce.net'>INB4SAUCE</a>
       <form class="form-inline">
         <a class="navbar-brand" href='https://inb4sauce.net/posts.php'>POSTS</a>
@@ -28,23 +28,10 @@
       NEVER WRONG. Ahead of schedule. Below budget. Anon delivers. Always.
     </div>
 
-    <!-- INCLUDE PAGE -->
     <?php
      require 'utils.php';
-     $lastpage = file_get_contents("last_page.txt");
-
-     if(isset($_GET['pages'])) {
-     $page = $_GET['pages'];
-     include("html/$page.html");
-     echo "<br><br>";
-    getPages($lastpage, $page);
-    }
-    else {
-    include("html/$lastpage.html");
-    echo "<br><br>";
-    getPages($lastpage, $lastpage);
-    }
-    getFooter();
+     include("markers.html");
+     getFooter();
     ?>
     <!-- Scripts -->
     <script src="scripts/search.js"></script> 

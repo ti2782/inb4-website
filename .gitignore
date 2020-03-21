@@ -1,6 +1,11 @@
 *~
-html/*
-data/*
-last_updated.txt
-last_page.txt
+**/html
+**/data
+*last_updated.txt
+*last_page.txt
+*last_post.txt
+*last_hash.txt
+*maintenance.html
+*newhash_hash.txt
+*notify.txt
 !.gitignore

@@ -31,16 +31,16 @@
     <!-- INCLUDE PAGE -->
     <?php
      require 'utils.php';
-     $lastpage = file_get_contents("last_page.txt");
+     $lastpage = file_get_contents("last_post.txt");
 
      if(isset($_GET['pages'])) {
      $page = $_GET['pages'];
-     include("html/$page.html");
+     include("html/posts/$page.html");
      echo "<br><br>";
     getPages($lastpage, $page);
     }
     else {
-    include("html/$lastpage.html");
+    include("html/posts/$lastpage.html");
     echo "<br><br>";
     getPages($lastpage, $lastpage);
     }

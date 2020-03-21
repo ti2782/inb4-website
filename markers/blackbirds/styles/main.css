@@ -1,0 +1,25 @@
+body {
+    background-color: rgb(37, 40, 48) !important;
+}
+
+.pagination > li.disabled > a{
+    background-color: rgb(37, 40, 48);
+}
+
+.col-container {
+  display: flex;
+  width: 100%;
+}
+.col {
+  flex: 1;
+  padding: 16px;
+}
+
+.fa {
+  padding: 20px;
+  font-size: 30px !important;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}

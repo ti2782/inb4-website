@@ -25,7 +25,7 @@
   <body>
     
     <div class="alert alert-dark" role="alert">
-      UNDER MAINTENANCE. NEVER WRONG. Ahead of schedule. Below budget. Anon delivers. Always.
+       <a href='https://inb4sauce.net/markers/decoy'>WATCH DECOY MARKER</a> NEVER WRONG. Ahead of schedule. Below budget. Anon delivers. Always.
     </div>
 
     <!-- INCLUDE PAGE -->

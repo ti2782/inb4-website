@@ -15,6 +15,7 @@
       <!-- Navbar content -->
       <a class="navbar-brand" href='https://inb4sauce.net'>INB4SAUCE</a>
       <form class="form-inline">
+        <a class="navbar-brand" href='https://paulfurber.net/bda/index.html'>BDANON</a>
         <a class="navbar-brand" href='https://inb4sauce.net/posts.php'>POSTS</a>
         <a class="navbar-brand" href='https://inb4sauce.net/markers.php'>MARKERS</a>
 	<input class="form-control mr-sm-2" type="search" id="search-text" placeholder="Search" aria-label="Search">
@@ -25,7 +26,7 @@
   <body>
     
     <div class="alert alert-dark" role="alert">
-       <a href='https://inb4sauce.net/markers/decoy'>WATCH DECOY MARKER</a> NEVER WRONG. Ahead of schedule. Below budget. Anon delivers. Always.
+    	 NEVER WRONG. Ahead of schedule. Below budget. Anon delivers. Always.
     </div>
 
     <!-- INCLUDE PAGE -->

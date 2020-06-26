@@ -26,26 +26,12 @@
     
     <div class="alert alert-dark" role="alert">
       NEVER WRONG. Ahead of schedule. Below budget. Anon delivers. Always.
+    </div>    
+    <div class="container">
+      <div class="row row-no-gutters">
+	<a class="twitter-timeline" data-theme="dark" href="https://twitter.com/Inb4Sauce?ref_src=twsrc%5Etfw">Tweets by Inb4Sauce</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </div>
     </div>
-
-    <!-- INCLUDE PAGE -->
-    <?php
-     require 'utils.php';
-     $lastpage = file_get_contents("last_post.txt");
-
-     if(isset($_GET['pages'])) {
-     $page = $_GET['pages'];
-     include("html/posts/$page.html");
-     echo "<br><br>";
-    getPages($lastpage, $page);
-    }
-    else {
-    include("html/posts/$lastpage.html");
-    echo "<br><br>";
-    getPages($lastpage, $lastpage);
-    }
-    getFooter();
-    ?>
     <!-- Scripts -->
     <script src="scripts/search.js"></script> 
   </body>

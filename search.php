@@ -19,6 +19,11 @@
         <a class="navbar-brand" href='https://inb4sauce.net/posts.php'>POSTS</a>
         <a class="navbar-brand" href='https://inb4sauce.net/markers.php'>MARKERS</a>
 	<input class="form-control mr-sm-2" type="search" id="search-text" placeholder="Search" aria-label="Search">
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="exactCheck">
+    <label class="form-check-label" for="exactCheck">Exact Match</label>
+  </div>
+    &nbsp;  
 	<button class="btn btn-outline-success my-2 my-sm-0" id="search-button" type="submit" onClick="javascript:searchButton()">Search</button>
       </form>      
     </nav>
@@ -31,51 +36,143 @@
 
     <!-- MONGODB -->
     <?php
-      if(isset($_GET['search'])) {
-     	$search = '"'.$_GET['search'].'"';
+     if(isset($_GET['search'])) {
+         $search = $_GET['search'];
+     if(isset($_GET['page']))
+        $page = $_GET['page'];
+     else
+        $page = 1;
+     if(isset($_GET['exact']))
+         $exact = true;
+     else
+         $exact = false;
+
 	require 'vendor/autoload.php';
 
+    
 	$coll = (new MongoDB\Client())->inb4->posts;
 	$threadcoll = (new MongoDB\Client())->inb4->threads;
-	$cursor = $coll->find(array('$text' => array('$search' => $search)));
+    if($exact) {
+        $cursor = $coll->find(array('$text' => array('$search' => '"'.$search.'"')));    
+        $pageNum = ceil(iterator_count($cursor) / 32);
+        $cursor = $coll->find(array('$text' => array('$search' => '"'.$search.'"')), array('sort' => array('timestamp'=>-1)));
+    }
+    else {        
+        $cursor = $coll->find(array('$text' => array('$search' => $search)));
+        $pageNum = ceil(iterator_count($cursor) / 32);
+        $cursor = $coll->find(array('$text' => array('$search' => $search)));
+    }
+    $iterator = new IteratorIterator($cursor);
+    $iterator->rewind();
+    
+    if($page > 1) {
+        $toskip = ($page - 1) * 32;
+        for($i = 0; $i < $toskip; $i++)
+            $iterator->next();
+    }
 
 	$count = 0;
 	echo '<div class="container">
 	     <div class="row row-no-gutters">';	 
-	     
-	foreach($cursor as $document) {
-		$post = $document[post];
-		$thread = $document[thread];
-		
-		$threadele = $threadcoll->findOne(array('thread' => $thread));
-		$title = $threadele['title'];
-		$src = $threadele['thumbnail'];
-		$thumb = '<img class="card-img-top" src="'.($src).'">';
+    while ( $iterator->valid() ) {
 
-		$link = '<a href="https://archive.4plebs.org/pol/thread/'.($thread).'/#q'.($post).'" ';
+            $document = $iterator->current();
+            $post = $document->post;
+            $thread = $document->thread;
 		
-	 	if($count % 4 == 0 && $count != 0) {
-			   echo '</div><br><br><div class="row row-no-gutters">';
-		}
+            $threadele = $threadcoll->findOne(array('thread' => $thread));
+            $title = $threadele['title'];
+            $src = $threadele['thumbnail'];
+            $thumb = '<img class="card-img-top" src="'.($src).'">';
+
+            $link = '<a href="https://archive.4plebs.org/pol/thread/'.($thread).'/#q'.($post).'" ';
 		
-		echo '<div class="col-sm-3">
-		<div class="card bg-dark text-white">'.($thumb).'
-		<div class="card-body">
-		<h4 class="card-title">'.($title).'</h4>
-		<p class="card-text">';
-		echo $document['txt'] . '</p></div><br>';
-		echo $link . '
-		class="btn btn-primary">View Post</a>
-		 </div></div>';
+            if($count % 4 == 0 && $count != 0) {
+                echo '</div><br><br><div class="row row-no-gutters">';
+            }
 		
-		++$count;
-	}
+            echo '<div class="col-sm-3">
+		    <div class="card bg-dark text-white">'.($thumb).'
+		    <div class="card-body">
+		    <h4 class="card-title">'.($title).'</h4>
+		    <p class="card-text">';
+            echo $document['txt'] . '</p></div><br>';
+            echo $link . '
+		    class="btn btn-primary">View Post</a>
+		    </div></div>';
+		
+            ++$count;
+            if($count >= 32)
+                break;
+        
+            $iterator->next();
+    }    
 	
 	if($count % 4 != 0)
 	   echo '</div>'; // ROW
-	   
-	echo '</div>'; // CONTAINER
-      }
+
+	echo '</div><br><br>'; // CONTAINER
+
+    var_dump($count);
+    
+    if($pageNum > 1)
+    {
+        echo '<nav aria-label="Pagination">
+               <ul class="pagination justify-content-center">';
+
+        if($exact) {
+            echo '<li class="page-item">
+                <a class="page-link" href="?page=1&search='.$search.'&exact=true">First</a></li>';                
+            }
+        else {            
+            echo '<li class="page-item">
+                <a class="page-link" href="?page=1&search='.$search.'">First</a></li>';
+        }
+
+        $maxpage = $page + 5;
+        $prevpage = $page - 1;
+        $nextpage = $page + 1;
+        if($prevpage >= 1) {
+           if($exact) {
+               echo '<li class="page-item"><a class="page-link" href="?page='.$prevpage.'&search='.$search.'&exact=true">Previous</a></li>';
+           }
+           else {
+               echo '<li class="page-item"><a class="page-link" href="?page='.$prevpage.'&search='.$search.'">Previous</a></li>';
+           }
+        }
+        
+        for($i = $page + 1; $i <= $pageNum; $i++)
+        {
+            if($i >= $maxpage)
+                break;
+            if($exact) {
+                echo '<li class="page-item"><a class="page-link" href="?page='.$i.'&search='.$search.'&exact=true">'.$i.'</a></li>';
+            }
+            else {
+                echo '<li class="page-item"><a class="page-link" href="?page='.$i.'&search='.$search.'">'.$i.'</a></li>';                
+            }
+        }
+       
+        if($nextpage <= $pageNum) {
+            if($exact) {
+                 echo '<li class="page-item"><a class="page-link" href="?page='.$nextpage.'&search='.$search.'&exact=true">Next</a></li>';
+            }
+            else {
+                 echo '<li class="page-item"><a class="page-link" href="?page='.$nextpage.'&search='.$search.'">Next</a></li>';
+            }
+        }
+        if($exact) {
+           echo '<li class="page-item">
+              <a class="page-link" href="?page='.$pageNum.'&search='.$search.'&exact=true">Last</a></li>';
+        }
+        else {
+           echo '<li class="page-item">
+              <a class="page-link" href="?page='.$pageNum.'&search='.$search.'">Last</a></li>';
+        }
+        echo '</ul> </nav>';
+            
+    }
+     }
     ?>
     <!-- Scripts -->
     <script src="scripts/search.js"></script> 

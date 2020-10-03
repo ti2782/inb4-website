@@ -11,7 +11,7 @@
 
     <!-- INCLUDE PAGE -->
     <?php
-     $lastpage = file_get_contents("last_page.txt");
+     $lastpage = file_get_contents("html/last_page.txt");
 
      if(isset($_GET['pages'])) {
      $page = $_GET['pages'];

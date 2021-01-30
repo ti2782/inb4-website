@@ -6,7 +6,7 @@
 ?>
   <body>    
     <div class="alert alert-dark" role="alert">
-     	 NEVER WRONG. Ahead of schedule. Below budget. Anon delivers. Always.
+      NEVER WRONG. Ahead of schedule. Below budget. Anon delivers. Always.
     </div>
 
     <!-- INCLUDE PAGE -->

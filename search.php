@@ -134,6 +134,9 @@
             echo $document['txt'] . '</p></div><br>';
             echo $link . '
 		    class="btn btn-primary">View Post</a>
+            <div class="card-footer">
+            <h6 class="card-subtitle mb-2 text-muted">'. date("F j, Y, g:i a", $document->timestamp)  . '</h6>
+            </div>
 		    </div></div>';
 		
             ++$count;
